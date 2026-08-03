@@ -8,12 +8,9 @@ Built while learning Front-end Development with a focus on working with APIs, as
 
 ---
 
-## 🚀  Getting Started
+## 🚀  Demo
 
-```bash
-git clone https://github.com/IreneFox2025/world_weather.git
-```
-Open `index.html` or run with Live Server.
+[![View site](https://img.shields.io/badge/View%20Demo-Open%20in%20Browser-blue?style=for-the-badge)](https://irenefox2025.github.io/world_weather/index.html)
 
 ## ✨ Features
 
