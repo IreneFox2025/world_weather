@@ -10,7 +10,7 @@ Built while learning Front-end Development with a focus on working with APIs, as
 
 ## 🚀  Demo
 
-[![Live Demo](https://img.shields.io/badge/🌤%20Live%20Demo-Open%20App-2ea44f?style=for-the-badge)](https://irenefox2025.github.io/world_weather/)
+[![Live Demo](https://img.shields.io/badge/🌤%20Live%20Demo-Open%20App-2ea44f?style=for-the-badge)]( https://irenefox2025.github.io/world_weather/)
 
 ## ✨ Features
 
