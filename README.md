@@ -59,9 +59,6 @@ world_weather/
 ![Animate.css](https://img.shields.io/badge/Animate.css-FF69B4)
 ![LocalStorage](https://img.shields.io/badge/LocalStorage-6C757D)
 
-- Animate.css
-- Local Storage
-
 ---
 
 ## 📸 Screenshots
