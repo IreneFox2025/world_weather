@@ -24,25 +24,45 @@ function addToCities(newSearch) {
   newSearch = newSearch.toLowerCase();
   const index = cities.indexOf(newSearch);
 
-  cities.push(newSearch);
-
-  if (index === -1) {
-    if (cities.length > max_limit) {
-      cities.splice(0, cities.length - max_limit);
-    }
-  } else {
+  if (index !== -1) {
     cities.splice(index, 1);
   }
+
+  cities.push(newSearch);
+
+  if (cities.length > max_limit) {
+    cities.splice(0, 1);
+  }
+}
+
+function showHistory() {
+  if (cities.length === 0) return;
+
+  history.classList.remove("hidden");
+  history.innerHTML = "";
+
+  cities.forEach((el) => {
+    const saved_city = document.createElement("li");
+    saved_city.classList.add("saved_city");
+    saved_city.textContent = el;
+
+    saved_city.addEventListener("click", (e) => {
+      getWeatherData(e.target.textContent);
+      history.classList.add("hidden");
+    });
+
+    history.append(saved_city);
+  });
 }
 
 const getWeatherData = async (city_name) => {
   let city = city_name || input.value.trim();
-  
+
   if (city === "") {
-  error.classList.remove("hidden");
-  error.textContent = "Please enter a city name";
-  return;
-}
+    error.classList.remove("hidden");
+    error.textContent = "Please enter a city name";
+    return;
+  }
 
   const url = API + city + apiKey;
   spinner.classList.remove("hidden");
@@ -58,11 +78,13 @@ const getWeatherData = async (city_name) => {
     addToCities(city);
 
     localStorage.setItem("citiesHistory", JSON.stringify(cities));
-  }
 
-  renderData(res);
-  renderMap(res);
-  input.value = "";
+    renderData(res);
+    renderMap(res);
+    input.value = "";
+  } else {
+    renderData(res);
+  }
 };
 
 // start search
@@ -72,24 +94,8 @@ form.addEventListener("submit", (e) => {
 });
 
 // search history list
-input.addEventListener("focus", (e) => {
-  history.classList.remove("hidden");
-  history.innerHTML = "";
-
-  cities.forEach((el) => {
-    const saved_city = document.createElement("li");
-    saved_city.classList.add("saved_city");
-    saved_city.innerHTML = `${el}`;
-
-    // search from the list
-    saved_city.addEventListener("click", (e) => {
-      getWeatherData(e.target.innerHTML);
-      history.classList.add("hidden");
-    });
-
-    history.append(saved_city);
-  });
-});
+input.addEventListener("focus", showHistory);
+input.addEventListener("click", showHistory);
 
 document.addEventListener("click", (e) => {
   if (!search_wrapper.contains(e.target)) {
@@ -100,6 +106,15 @@ document.addEventListener("click", (e) => {
 input.addEventListener("keydown", (e) => {
   history.classList.add("hidden");
 });
+
+//
+const renderStartScreen = () => {
+  output.innerHTML = "";
+  outputWrap.classList.add("hidden");
+
+  error.classList.remove("hidden");
+  error.textContent = "Enter your city to see the weather";
+};
 
 //
 const renderData = (data) => {
@@ -203,7 +218,7 @@ const renderData = (data) => {
   } else {
     outputWrap.classList.add("hidden");
     error.classList.remove("hidden");
-   if (+data.cod == 404) {
+    if (+data.cod == 404) {
       error.textContent = "City not found";
     } else if (+data.cod == 400) {
       error.textContent = "Please enter a city name";
@@ -243,6 +258,8 @@ if (savedWeather) {
   setTimeout(() => {
     map.invalidateSize();
   }, 500);
+} else {
+  renderStartScreen();
 }
 
 const citiesHistory = localStorage.getItem("citiesHistory");
