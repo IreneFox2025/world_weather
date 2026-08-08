@@ -12,10 +12,6 @@ Built while learning Front-end Development with a focus on working with APIs, as
 
 [![Live Demo](https://img.shields.io/badge/🌤%20Live%20Demo-Open%20App-2ea44f?style=for-the-badge)](https://irenefox2025.github.io/world_weather/)
 
-## 🎥 Video
-
-https://github.com/IreneFox2025/world_weather/blob/main/video/demo_video.mp4
-
 ## 📂 Project Structure
 
 ```text
